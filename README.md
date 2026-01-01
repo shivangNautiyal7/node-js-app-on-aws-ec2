@@ -2,61 +2,81 @@
 
 ## 📌 Project Overview
 
-This project demonstrates the deployment of a **Node.js application** on an **AWS EC2 instance**.
-It is created for **learning and practice purposes**, focusing on server setup, environment configuration, and deployment workflows.
+This repository is created to demonstrate **deployment and server configuration skills** using an open-source application.
+The goal of this project is to practice deploying, running, and managing a Node.js application on an **AWS EC2 instance**.
 
-> ⚠️ This repository uses an open-source codebase for learning purposes.
-> The core application logic is **not originally developed by me**.
-
----
-
-## What This Project Demonstrates
-
-* Deploying a Node.js application on AWS EC2
-* Using environment variables securely
-* Running applications with Node.js
-* Managing project dependencies
-* Basic DevOps and server setup workflow
+> ⚠️ The application source code is **not originally developed by me**.
+> This repository is used strictly for **learning and deployment practice**.
 
 ---
 
-##  Tech Stack
+## 📘 Project Attribution
 
-* **Node.js**
-* **Express.js**
-* **Docker (optional)**
-* **AWS EC2 (Ubuntu)**
-* **Git & GitHub**
+Original project source:
+👉 [https://github.com/verma-kunal/AWS-Session](https://github.com/verma-kunal/AWS-Session)
 
----
+All rights and ownership of the original source code belong to the original author.
 
-## Project Structure
+My contribution includes:
 
-```
-.
-├── server.js
-├── package.json
-├── package-lock.json
-├── Dockerfile
-├── .env.example
-├── .gitignore
-└── README.md
-```
+* Deploying the application on AWS EC2
+* Configuring the Linux server environment
+* Installing and managing dependencies
+* Running the application using PM2
+* Verifying production-level execution
 
 ---
 
-##  Setup Instructions
+## 🛠️ Tech Stack
 
-### 1️⃣ Clone the Repository
+* AWS EC2 (Ubuntu)
+* Node.js
+* npm
+* PM2
+* Git
+* Linux Shell
+
+---
+
+## 🚀 Deployment Steps
+
+### 1️⃣ Launch EC2 Instance
+
+* Ubuntu 20.04 or later
+* Open inbound ports:
+
+  * **22** (SSH)
+  * **3000** (Application)
+
+---
+
+### 2️⃣ Connect to Server
 
 ```bash
-git clone https://github.com/<your-username>/your-repo-name.git
-cd your-repo-name
+ssh -i your-key.pem ubuntu@<EC2_PUBLIC_IP>
 ```
 
 ---
 
-### 2️⃣ Install Dependencies
+### 3️⃣ Install Required Packages
+
+```bash
+sudo apt update
+sudo apt install -y nodejs npm git
+```
+
+---
+
+### 4️⃣ Clone Repository
+
+```bash
+git clone https://github.com/<your-username>/AWS-Session.git
+cd AWS-Session
+```
+
+---
+
+### 5️⃣ Install Dependencies
 
 ```bash
 npm install
@@ -64,74 +84,71 @@ npm install
 
 ---
 
-### 3️⃣ Create Environment File
+### 6️⃣ Configure Environment Variables
 
-Create a `.env` file in the root directory:
+Create `.env` file:
+
+```bash
+nano .env
+```
+
+Example:
 
 ```env
 PORT=3000
-STRIPE_SECRET_KEY=your_secret_key_here
+NODE_ENV=production
 ```
-
-> ⚠️ Never commit `.env` files to GitHub.
 
 ---
 
-### 4️⃣ Run the Application
+### 7️⃣ Run the Application
+
+#### Development Mode
 
 ```bash
 npm start
 ```
 
-Server will start on:
-
-```
-http://localhost:3000
-```
-
----
-
-##  Optional: Run with Docker
+#### Production Mode (Recommended)
 
 ```bash
-docker build -t node-app .
-docker run -p 3000:3000 --env-file .env node-app
+sudo npm install -g pm2
+pm2 start server.js --name aws-session
+pm2 save
+pm2 startup
 ```
 
 ---
 
-##  Security Notes
+## 🌐 Access the Application
 
-* Secrets are **not** committed to the repository.
-* `.env` is excluded via `.gitignore`.
-* All sensitive data must be stored in environment variables.
+Open your browser and go to:
+
+```
+http://<EC2_PUBLIC_IP>:3000
+```
 
 ---
 
-##  Deployment
+## ⚠️ Important Notes
 
-This project can be deployed on:
-
-* AWS EC2
-* DigitalOcean
-* Railway / Render
-* Any Linux-based server
+* Do **not** commit `.env` files
+* Keep your AWS keys and credentials private
+* Stop EC2 instances when not in use to avoid billing
 
 ---
 
 ## 📄 License
 
-This project is for **learning and educational purposes only**.
-Original source code belongs to the respective author.
+This project follows the same license as the original repository.
+All rights remain with the original author.
 
 ---
 
-## ✅ Final Notes
+If you want, I can also:
+✅ Add Docker support
+✅ Add Nginx reverse proxy
+✅ Make this README resume-ready
+✅ Add architecture diagrams
 
-✔ Clean Git history
-✔ No exposed secrets
-✔ Beginner-friendly
-✔ Deployment-ready
-
----
-
+Just tell me 👍

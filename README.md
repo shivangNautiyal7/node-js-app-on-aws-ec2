@@ -1,6 +1,6 @@
 # AWS Deployment Practice Project
 
-##📌 Project Overview
+##📌   Project Overview
 
 This repository is created to demonstrate **deployment and server configuration skills** using an open-source application.
 The goal of this project is to practice deploying, running, and managing a Node.js application on an **AWS EC2 instance**.
